@@ -1,9 +1,7 @@
 const controllers = require("../../controller");
 const userGame = require("../../models");
 const mockRequest = (body = {}) => ({ body });
-const params = (params = {}) => ({
-  params,
-});
+
 const mockResponse = () => {
   const res = {};
   res.status = jest.fn().mockReturnValue(res);
@@ -25,7 +23,9 @@ describe("GET/ users/show", () => {
       });
 
       done();
-    } catch (err) {}
+    } catch (err) {
+      //console.log(err)
+    }
   });
 });
 
@@ -51,7 +51,9 @@ describe("PUT /users/update/id", () => {
       });
 
       done();
-    } catch (err) {}
+    } catch (err) {
+      //console.log(err)
+    }
   });
 });
 
@@ -72,6 +74,8 @@ describe("DELETE /users/delete/id", () => {
       });
 
       done();
-    } catch (err) {}
+    } catch (err) {
+      //console.log(err)
+    }
   });
 });

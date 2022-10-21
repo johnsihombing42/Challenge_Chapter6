@@ -10,25 +10,23 @@ const mockResponse = () => {
   return res;
 };
 
-describe("POST /biodata", () => {
+describe("POST /history", () => {
   // case success
-  test("Should be 201 if successfully create user biodata", async () => {
+  test("Should successfully create user history", async () => {
     try {
       const req = mockRequest({
-        id_user: 17,
-        name: "Sihombing",
-        email: "sihombing@gmail.com",
-        address: "Medan",
-        phone: "08277373",
+        id_user: 10,
+        time_list: 60,
+        score: 100,
       });
       const res = mockResponse();
 
-      await controllers.user_biodata.createUserBiodata(req, res);
+      await controllers.user_history.createUserHistory(req, res);
 
       expect(res.status).toBe(201);
       expect(res.json).toBeCalledWith({
-        status: true,
-        message: "Create User Biodata Success",
+        status: "success",
+        message: "Create User History Success",
       });
 
       done();
@@ -37,11 +35,11 @@ describe("POST /biodata", () => {
     }
   });
 });
-describe("GET /biodata/show", () => {
+describe("GET history/show", () => {
   // case success
-  test("Should be 200 successfully show user biodata", async () => {
+  test("Should successfully show user history", async () => {
     try {
-      await controllers.user_biodata.readAllData(req, res);
+      await controllers.user_history.readUserHistory(req, res);
       expect(res.status).toBeCalledWith(200);
       expect(res.json).toBeCalledWith({
         status: true,
@@ -56,9 +54,9 @@ describe("GET /biodata/show", () => {
   });
 });
 
-describe("GET /biodata/show/:id", () => {
+describe("GET /history/show/:id", () => {
   // case success
-  test("Should be 200 successfully show user biodata by id", async () => {
+  test("Should be 201 successfully show user history by id", async () => {
     try {
       const { userId } = req.params;
       const req = await {
@@ -68,7 +66,7 @@ describe("GET /biodata/show/:id", () => {
       expect(res.status).toBeCalledWith(200);
       expect(res.json).toBeCalledWith({
         status: true,
-        message: "Read Data",
+        message: "Read Data Success",
         data: userGame,
       });
 
@@ -79,22 +77,20 @@ describe("GET /biodata/show/:id", () => {
   });
 });
 
-describe("PUT /biodata/update/id", () => {
+describe("PUT /historu/update/:id", () => {
   // case success
-  test("Should successfully update user bidata", async () => {
+  test("Should successfully update user history", async () => {
     try {
       const req = mockRequest({
-        id_user: 17,
-        name: "Silaban",
-        email: "sihombing@gmail.com",
-        address: "Medan Labuhan",
-        phone: "08277373",
+        id_user: 10,
+        time_list: 70,
+        score: 120,
       });
 
       const res = mockResponse();
       await controllers.user_biodata.updateUserBiodata(req, res);
 
-      expect(res.status).toBe(200);
+      expect(res.status).toBe(201);
       expect(res.json).toBeCalledWith({
         status: true,
         message: "Update Data Success",
@@ -104,17 +100,15 @@ describe("PUT /biodata/update/id", () => {
       });
 
       done();
-    } catch (err) {
-      //console.log(err)
-    }
+    } catch (err) {}
   });
 });
 
-describe("DELETE /biodata/delete/:userId", () => {
+describe("DELETE /history/delete/:userId", () => {
   // case success
-  test("Should successfully delete user game", async () => {
+  test("Should successfully delete data", async () => {
     try {
-      const { userId } = request.params;
+      const { userId } = req.params;
       const req = await {
         userId,
       };
